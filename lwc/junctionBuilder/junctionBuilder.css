@@ -1,0 +1,27 @@
+.sticky-button-container {
+    position: sticky;
+    text-align: right;
+    top: 210px;
+    z-index: 10;
+}
+.input-line {
+    display: flex;
+}
+
+.input-line lightning-input {
+    font-size: large;
+    margin-right: 1em;
+}
+label {
+    display: block;
+    font-weight: bold;
+}
+.input-fields lightning-input-field {
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+}
+.input-line:not(:last-child) {
+    border-bottom: 2px solid lightgray;
+    margin-bottom: 1em;
+}

@@ -1,0 +1,29 @@
+<template>
+    <div if:true={isLoading}>
+        <lightning-spinner variant="brand" style="cursor:not-allowed" alternative-text="Processing"></lightning-spinner>
+    </div>
+
+    <lightning-card title={title}>
+        <div class="sticky-button-container">
+            <lightning-button label={safeButtonLabel} variant="brand" onclick={createJunctionRecords}></lightning-button>
+        </div>
+
+        <div if:false={isLoading} if:true={allRecords}>
+            <template for:each={allRecords} for:item="record">
+                <div class="input-line" data-inputline={record.Id} key={record.Id}>
+                    <lightning-input value={record.Id} type="checkbox-button" class="checkbox-button"></lightning-input>
+                    <div>
+                        <label>{record.Name}</label>
+                        <div if:true={fields.length} class="input-fields">
+                            <lightning-record-edit-form object-api-name={joinObject}>
+                                <template for:each={fields} for:item="field">
+                                    <lightning-input-field key={field} field-name={field} data-fieldname={field}></lightning-input-field>
+                                </template>
+                            </lightning-record-edit-form>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

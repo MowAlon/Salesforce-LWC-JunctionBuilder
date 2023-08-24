@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Junction Builder</masterLabel>
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="title"                label="Title"                                     type="String"  required="false" placeholder="Optional Title"                                                       description="Optional, appears at the top of the component" />
+            <property name="buttonLabel"          label="Button Label"                              type="String"  required="false" placeholder="Optional replacement for button label"                                description="" />
+            <property name="joinObject"           label="Junction Object (API Name)"                type="String"  required="true"  placeholder=""                                                                     description="" />
+            <property name="primaryLookupField"   label="Lookup Field to this object (API Name)"    type="string"  required="true"  placeholder="API Name of Lookup field for the object on this record page"          description="API Name of Lookup field for the object on this record page. For instance, if you're adding this component to the Account record page, use the API name of the field that links the junction object to the Account object." />
+            <property name="secondaryLookupField" label="Lookup Field to related object (API Name)" type="String"  required="true"  placeholder="API Name of Lookup field for the object you want listed on this page" description="API Name of the Lookup field for the object you want to link to the object on this record page. For instance, if you're adding this to the Account record page and your junction object is AccountContactRole, use 'ContactId' because that's the API Name of the field that links the AccountContactRole object to the Contact object which you're trying to connect to an Account." />
+            <property name="inputFields"          label="Input Fields"                              type="String"  required="false" placeholder="Volume__c, Important_Date__c, Cool_Data__c"                           description="Optional, comma-separated list of API names for fields on the junction object. This allows the user to provide customized values for each new junction record created." />
+            <property name="soqlFilter"           label="Filter (SOQL) for Related Object Search"   type="String"  required="false" placeholder="Ex: Active__c = true OR CreatedDate = THIS_YEAR"                      description="" />
+            <property name="extraSOQL"            label="Extra SOQL for Related Object Search"      type="String"  required="false" placeholder="ORDER BY LastModifiedDate LIMIT 100"                                  description="" />
+            <property name="sortByName"           label="Sort by Name"                              type="Boolean" default="true"                                                                                      description="It's best to disable this if you're also using Extra SOQL as it will probably interfere interfere." />
+            <property name="navigateToFullList"   label="Navigate to Full List After Adding"        type="Boolean" default="false"                                                                                     description="Usually not recommended - this redirects the user to the full list of related junction records after clicking the button for record creation. Recommended behavior is to include the standard 'Related List - Single' component at the top of the page (which automatically refreshes after adding new records)." />
+        </targetConfig>
+    </targetConfigs>
+
+</LightningComponentBundle>
