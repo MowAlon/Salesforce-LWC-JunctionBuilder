@@ -81,4 +81,25 @@ public abstract class Utilities {
         return null;
     }
 
+   public static Object related_field(sObject an_sobject, String target_field) {
+      // This is a recursive method that returns a related field from a generic sObject... like the Name of the Manager of the Owner of a record.
+      // If any sObject along the way is null, it returns null.
+      // an_sobject is any sObject with or without related sObjects
+      // target_field is the SOQL-formatted reference to a field, as it would be reference from an_sobject...
+      //    For example, if you have an Opportunity and want its Account's Owner's Manager's Name,
+      //    an_sobject is the Opportunity record and "Account.Owner.Manager.Name" is the target_field
+
+      if (an_sobject != null) {
+         Integer characters_left_of_dot = target_field.indexOf('.');
+         Boolean has_related_sobject    = characters_left_of_dot != -1;
+
+         if (has_related_sobject) {
+            String next_related_sobject = target_field.left(characters_left_of_dot);
+            return related_field(an_sobject.getSObject(next_related_sobject), target_field.substring(characters_left_of_dot + 1));
+         } else {
+            return an_sobject.get(target_field);
+         }
+      } else {return null;}
+   }
+
 }
